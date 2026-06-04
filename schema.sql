@@ -5,3 +5,13 @@ CREATE TABLE cargo (
     nombre VARCHAR(50) NOT NULL UNIQUE
 ); 
 
+--Segunda entidad: Cliente DL
+CREATE TABLE cliente (
+    id_cli SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    dni VARCHAR(15) NOT NULL UNIQUE,
+    telefono VARCHAR(20),
+    email VARCHAR(100) UNIQUE,
+    direccion VARCHAR(200)
+);
