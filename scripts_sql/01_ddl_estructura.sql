@@ -108,3 +108,49 @@ CREATE TABLE detalle_venta(
     id_mpago SERIAL PRIMARY KEY,
     descripcion VARCHAR(50) NOT NULL
 );
+
+
+-- 12ava entidad: pago_venta
+CREATE TABLE pago_venta (
+    id_pago SERIAL PRIMARY KEY,
+    monto DECIMAL(12,2) NOT NULL,
+
+    -- llaves foráneas (hereda de la factura de venta y del metodo de pago)
+    id_venta INT NOT NULL REFERENCES cabecera_venta(id_venta),
+    id_mpago INT NOT NULL REFERENCES metodo_pago(id_mpago)
+);
+
+-- 13ava entidad: garantía
+CREATE TABLE garantia (
+    id_gar SERIAL PRIMARY KEY,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE NOT NULL,
+    condiciones TEXT,
+
+    -- llave foránea (hereda del detalle de venta)
+    id_detalle INT NOT NULL REFERENCES detalle_venta(id_detalle)
+);
+
+-- 14ava entidad: cabecera_compra
+CREATE TABLE cabecera_compra (
+    id_compra SERIAL PRIMARY KEY,
+    fecha DATE NOT NULL,
+    total DECIMAL(12,2) NOT NULL DEFAULT 0.00,
+
+    -- llaves foráneas (hereda de proveedor y sucursal)
+    id_prov INT NOT NULL REFERENCES proveedor(id_prov),
+    id_suc INT NOT NULL REFERENCES sucursal(id_suc) 
+);
+
+-- 15ava entidad: detalle_compra
+CREATE TABLE detalle_compra (
+    id_detalle_c SERIAL PRIMARY KEY,
+    cantidad INT NOT NULL,
+    precio_unitario DECIMAL(10,2) NOT NULL,
+
+    -- llaves foráneas (hereda de la compra y del celular)
+    id_compra INT NOT NULL REFERENCES cabecera_compra(id_compra),
+    id_smart INT NOT NULL REFERENCES smartphone(id_smart)
+);
+
+
