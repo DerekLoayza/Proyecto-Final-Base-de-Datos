@@ -1,2 +1,6 @@
 # Proyecto-Final-Base-de-Datos
-Tung tung Tech
+Integrantes del Proyecto: Tung tung Tech
+-
+-
+-Loayza Chuquicaña Derek Mauricio
+-
