@@ -104,7 +104,7 @@ CREATE TABLE detalle_venta(
 );
 
 --Duodécima entidad: Metodo_pago
--- CREATE TABLE metodo_pago(
+ CREATE TABLE metodo_pago(
     id_mpago SERIAL PRIMARY KEY,
     descripcion VARCHAR(50) NOT NULL
 );
