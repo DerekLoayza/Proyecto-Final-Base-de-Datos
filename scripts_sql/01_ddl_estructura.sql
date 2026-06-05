@@ -75,8 +75,8 @@ CREATE TABLE employees(
 
 
     --llaves foráneas
-    id_suc INT NOT NULL REFERENCES sucursal(id_suc),
-    id_cargo INT NOT NULL REFERENCES cargo(id_cargo)
+    id_suc INT NOT NULL REFERENCES sucursal(id_suc) ON DELETE CASCADE,
+    id_cargo INT NOT NULL REFERENCES cargo(id_cargo) ON DELETE CASCADE
 );
 
 --Décima entidad: Cabecera_venta
@@ -87,9 +87,9 @@ CREATE TABLE cabecera_venta(
 
 
     --llaves foráneas
-    id_cli INT NOT NULL REFERENCES cliente(id_cli),
-    id_emp INT NOT NULL REFERENCES employees(id_emp),
-    id_suc INT NOT NULL REFERENCES sucursal(id_suc)
+    id_cli INT NOT NULL REFERENCES cliente(id_cli) ON DELETE CASCADE,
+    id_emp INT NOT NULL REFERENCES employees(id_emp) ON DELETE CASCADE,
+    id_suc INT NOT NULL REFERENCES sucursal(id_suc) ON DELETE CASCADE
 );
 
 --Undécima entidad: Detalle_venta
@@ -99,8 +99,8 @@ CREATE TABLE detalle_venta(
     precio_unitario INT NOT NULL,
 
     --llaves foráneas
-    id_smart INT NOT NULL REFERENCES smartphone(id_smart),
-    id_venta INT NOT NULL REFERENCES cabecera_venta(id_venta)
+    id_smart INT NOT NULL REFERENCES smartphone(id_smart) ON DELETE CASCADE,
+    id_venta INT NOT NULL REFERENCES cabecera_venta(id_venta) ON DELETE CASCADE
 );
 
 --Duodécima entidad: Metodo_pago
