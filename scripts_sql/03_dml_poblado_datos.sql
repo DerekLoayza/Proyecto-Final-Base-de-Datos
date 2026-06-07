@@ -12,23 +12,41 @@ VALUES (1, '2026-06-07 10:00:00', 3500.00, 1, 1, 1);
 INSERT INTO DETALLE_VENTA (id_detalle, id_venta, id_smart, cantidad, precio_unitario)
 VALUES (1, 1, 1, 1, 3500.00);
 
+-- Poblando tabla categoria
+INSERT INTO categoria (id_cat, nombre) 
+VALUES
+    (1, 'Gama Alta'),
+    (2, 'Gama Media'),
+    (3, 'Gama Baja'),
+    (4, 'Gaming'),
+    (5, 'Empresarial');
 
+-- Poblando tabla marca
+INSERT INTO marca (id_marca, nombre) 
+VALUES
+    (1, 'Samsung'),
+    (2, 'Apple'),
+    (3, 'Xiaomi'),
+    (4, 'Motorola'),
+    (5, 'Huawei');
 
+-- poblando tabla smartphone
+INSERT INTO smartphone(modelo, precio, stock, especificaciones, id_marca, id_cat)
+VALUES
+    ('Galaxy S24 Ultra', 1399.99, 15, '12GB RAM, 512GB, Snapdragon 8 Gen 3', 1, 1),
+    ('iPhone 15 Pro', 1499.99, 10, '8GB RAM, 512GB, A17 Pro', 2, 1),
+    ('Redmi Note 13 Pro', 449.99, 30, '8GB RAM, 256GB, Snapdragon 7s Gen 2', 3, 2),
+    ('Moto G84', 329.99, 25, '12GB RAM, 256GB, Snapdragon 695', 4, 2),
+    ('Huawei Nova 12', 599.99, 20, '8GB RAM, 256GB, Kirin', 5, 5);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- POblando tabla sucursal
+INSERT INTO sucursal (nombre, direccion, telefono)
+VALUES
+    ('Sucursal Centro', 'Av. Principal 123', '987654321'),
+    ('Sucursal Norte', 'Calle Los Pinos 456', '987654322'),
+    ('Sucursal Sur', 'Av. Las Flores 789', '987654323'),
+    ('Sucursal Este', 'Jr. Los Olivos 321', '987654324'),
+    ('Sucursal Oeste', 'Av. Independencia 654', '987654325');
 
 -- Poblando tabla pago_venta
 INSERT INTO pago_venta (monto, id_venta, id_mpago)
