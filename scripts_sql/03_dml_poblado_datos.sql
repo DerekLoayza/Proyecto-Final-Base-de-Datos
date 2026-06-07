@@ -2,7 +2,15 @@
 INSERT INTO SMARTPHONE (id_smart, modelo, precio, stock, especificaciones, id_marca, id_cat) 
 VALUES (1, 'Galaxy S24', 3500.00, 20, '256GB, 8GB RAM', 1, 1);
 
+INSERT INTO EMPLEADO (id_emp, nombre, apellido, dni, id_suc, id_cargo) 
+VALUES (1, 'Juan', 'Perez', '12345678', 1, 1);
 
+-- Datos de prueba para simular una venta y probar el reporte
+INSERT INTO CABECERA_VENTA (id_venta, fecha, total, id_cli, id_emp, id_suc)
+VALUES (1, '2026-06-07 10:00:00', 3500.00, 1, 1, 1);
+
+INSERT INTO DETALLE_VENTA (id_detalle, id_venta, id_smart, cantidad, precio_unitario)
+VALUES (1, 1, 1, 1, 3500.00);
 
 
 
