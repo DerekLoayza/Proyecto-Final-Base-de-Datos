@@ -15,3 +15,24 @@ ALTER TABLE CABECERA_VENTA ADD CONSTRAINT fk_venta_sucursal FOREIGN KEY (id_suc)
 -- Foráneas de DETALLE_VENTA
 ALTER TABLE DETALLE_VENTA ADD CONSTRAINT fk_detalle_venta FOREIGN KEY (id_venta) REFERENCES CABECERA_VENTA(id_venta) ON DELETE CASCADE;
 ALTER TABLE DETALLE_VENTA ADD CONSTRAINT fk_detalle_smart FOREIGN KEY (id_smart) REFERENCES SMARTPHONE(id_smart);
+
+
+
+
+-- Foraneas de pago_venta
+ALTER TABLE pago_venta ADD CONSTRAINT fk_pago_venta_venta FOREIGN KEY (id_venta) REFERENCES cabecera_venta(id_venta);
+ALTER TABLE pago_venta ADD CONSTRAINT fk_pago_venta_mpago FOREIGN KEY (id_mpago) REFERENCES metodo_pago(id_mpago);
+
+--Foraneas de garantía
+ALTER TABLE garantía ADD CONSTRAINT fk_garantía_detalle FOREIGN KEY (id_detalle) REFERENCES detalle_venta(id_detalle);
+
+--Foraneas de cabecera_compra
+ALTER TABLE cabecera_compra ADD CONSTRAINT fk_cabecera_compra_prov FOREIGN KEY (id_prov) REFERENCES proveedor(id_prov);
+ALTER TABLE cabecera_compra ADD CONSTRAINT fk_cabecera_compra_suc FOREIGN KEY (id_suc) REFERENCES sucursal(id_suc);
+
+--Foraneas de detalle_compra
+ALTER TABLE detalle_compra ADD CONSTRAINT fk_detalle_compra_compra FOREIGN KEY (id_compra) REFERENCES cabecera_compra(id_compra);
+ALTER TABLE detalle_compra ADD CONSTRAINT fk_detalle_compra_smart FOREIGN KEY (id_smart) REFERENCES smartphone(id_smart);
+
+
+
