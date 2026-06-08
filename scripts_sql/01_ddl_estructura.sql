@@ -66,8 +66,8 @@ CREATE TABLE Sucursal{
     telefono VARCHAR(20) NOT NULL UNIQUE
 };
 
---Novena entidad: Employees
-CREATE TABLE employees(
+--Novena entidad: Empleado
+CREATE TABLE empleado(
     id_emp SERIAL PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
