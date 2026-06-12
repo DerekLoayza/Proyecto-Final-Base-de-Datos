@@ -24,7 +24,7 @@ ALTER TABLE pago_venta ADD CONSTRAINT fk_pago_venta_venta FOREIGN KEY (id_venta)
 ALTER TABLE pago_venta ADD CONSTRAINT fk_pago_venta_mpago FOREIGN KEY (id_mpago) REFERENCES metodo_pago(id_mpago);
 
 --Foraneas de garantía
-ALTER TABLE garantía ADD CONSTRAINT fk_garantía_detalle FOREIGN KEY (id_detalle) REFERENCES detalle_venta(id_detalle);
+ALTER TABLE garantia ADD CONSTRAINT fk_garantía_detalle FOREIGN KEY (id_detalle) REFERENCES detalle_venta(id_detalle);
 
 --Foraneas de cabecera_compra
 ALTER TABLE cabecera_compra ADD CONSTRAINT fk_cabecera_compra_prov FOREIGN KEY (id_prov) REFERENCES proveedor(id_prov);
