@@ -26,19 +26,19 @@ CREATE TABLE proveedor (
 );
 
 -- Cuarta entidad: Categoría
-CREATE TABLE categoria{
+CREATE TABLE categoria(
     id_cat INT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL UNIQUE
-};
+);
 
 -- Quinta entidad: Marca
-CREATE TABLE marca{
+CREATE TABLE marca(
     id_marca INT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL UNIQUE
-};
+);
 
 -- Sexta entidad: Smartphone
-CREATE TABLE smartphone{
+CREATE TABLE smartphone(
     id_smart SERIAL PRIMARY KEY,
     modelo VARCHAR(100) NOT NULL,
     precio DECIMAL(10,2) NOT NULL,
@@ -56,15 +56,15 @@ CREATE TABLE smartphone{
         FOREIGN KEY (id_marca) REFERENCES marca(id_marca),
     CONSTRAINT fk_smartphone_categoria 
         FOREIGN KEY (id_cat) REFERENCES categoria(id_cat)
-};
+);
 
 -- Séptima entidad: Sucursal
-CREATE TABLE Sucursal{
+CREATE TABLE Sucursal(
     id_suc SERIAL PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL UNIQUE,
     direccion VARCHAR(100) NOT NULL UNIQUE,
     telefono VARCHAR(20) NOT NULL UNIQUE
-};
+);
 
 --Novena entidad: Empleado
 CREATE TABLE empleado(
