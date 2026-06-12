@@ -88,7 +88,7 @@ CREATE TABLE cabecera_venta(
 
     --llaves foráneas
     id_cli INT NOT NULL REFERENCES cliente(id_cli) ON DELETE CASCADE,
-    id_emp INT NOT NULL REFERENCES employees(id_emp) ON DELETE CASCADE,
+    id_emp INT NOT NULL REFERENCES empleado(id_emp) ON DELETE CASCADE,
     id_suc INT NOT NULL REFERENCES sucursal(id_suc) ON DELETE CASCADE
 );
 
