@@ -1,34 +1,30 @@
-
-INSERT INTO cargo (nombre) 
+-- ---------------------------
+-- Poblado de Datos en general
+-- ---------------------------
+INSERT INTO cargo (nombre)
 VALUES ('Vendedor'), ('Administrador');
-
-INSERT INTO cliente (nombre, apellido, dni) 
+INSERT INTO cliente (nombre, apellido, dni)
 VALUES ('Juan', 'Perez', '12345678');
-
-INSERT INTO proveedor (nombre, ruc) 
+INSERT INTO proveedor (nombre, ruc)
 VALUES ('Dist A', '10000000001'), ('Dist B', '10000000002'), ('Dist C', '10000000003'), ('Dist D', '10000000004'), ('Dist E', '10000000005');
-INSERT INTO metodo_pago (descripcion) 
-
+INSERT INTO metodo_pago (descripcion)
 VALUES ('Efectivo'), ('Tarjeta'), ('Yape');
-
 -- Poblando tabla categoria
-INSERT INTO categoria (id_cat, nombre) 
+INSERT INTO categoria (id_cat, nombre)
 VALUES
     (1, 'Gama Alta'),
     (2, 'Gama Media'),
     (3, 'Gama Baja'),
     (4, 'Gaming'),
     (5, 'Empresarial');
-
 -- Poblando tabla marca
-INSERT INTO marca (id_marca, nombre) 
+INSERT INTO marca (id_marca, nombre)
 VALUES
     (1, 'Samsung'),
     (2, 'Apple'),
     (3, 'Xiaomi'),
     (4, 'Motorola'),
     (5, 'Huawei');
-
 -- poblando tabla smartphone
 INSERT INTO smartphone(modelo, precio, stock, especificaciones, id_marca, id_cat)
 VALUES
@@ -37,7 +33,6 @@ VALUES
     ('Redmi Note 13 Pro', 449.99, 30, '8GB RAM, 256GB, Snapdragon 7s Gen 2', 3, 2),
     ('Moto G84', 329.99, 25, '12GB RAM, 256GB, Snapdragon 695', 4, 2),
     ('Huawei Nova 12', 599.99, 20, '8GB RAM, 256GB, Kirin', 5, 5);
-
 -- POblando tabla sucursal
 INSERT INTO sucursal (nombre, direccion, telefono)
 VALUES
@@ -46,40 +41,52 @@ VALUES
     ('Sucursal Sur', 'Av. Las Flores 789', '987654323'),
     ('Sucursal Este', 'Jr. Los Olivos 321', '987654324'),
     ('Sucursal Oeste', 'Av. Independencia 654', '987654325');
-
-    -- Inserts básicos de prueba 
-INSERT INTO EMPLEADO (id_emp, nombre, apellido, dni, id_suc, id_cargo) 
-VALUES (1, 'Juan', 'Perez', '12345678', 1, 1);
-
+-- Inserts básicos de prueba 
+INSERT INTO empleado (nombre, apellido, dni, id_suc, id_cargo)
+VALUES ('Juan', 'Perez', '12345678', 1, 1);
 -- Datos de prueba para simular una venta y probar el reporte
-INSERT INTO CABECERA_VENTA (id_venta, fecha, total, id_cli, id_emp, id_suc)
-VALUES (1, '2026-06-07 10:00:00', 3500.00, 1, 1, 1);
-
-INSERT INTO DETALLE_VENTA (id_detalle, id_venta, id_smart, cantidad, precio_unitario)
-VALUES (1, 1, 1, 1, 3500.00);
-
+INSERT INTO cabecera_venta (fecha, total, id_cli, id_emp, id_suc)
+VALUES ('2026-06-07 10:00:00', 3500.00, 1, 1, 1);
+INSERT INTO detalle_venta (id_venta, id_smart, cantidad, precio_unitario)
+VALUES (1, 1, 1, 3500.00);
 -- Poblando tabla pago_venta
-INSERT INTO pago_venta (monto, id_venta, id_mpago) 
+INSERT INTO pago_venta (monto, id_venta, id_mpago)
 VALUES (3500.00, 1, 1);
-
 -- Poblando tabla garantia
-INSERT INTO garantia (fecha_inicio, fecha_fin, condiciones, id_detalle) 
+INSERT INTO garantia (fecha_inicio, fecha_fin, condiciones, id_detalle)
 VALUES ('2026-06-07', '2027-06-07', 'Cubre defectos de fabrica', 1);
-
 -- Poblando tabla cabecera_compra
 INSERT INTO cabecera_compra (fecha, total, id_prov, id_suc)
-VALUES 
+VALUES
     ('2023-10-01', 5000.00, 1, 1),
     ('2023-10-15', 7500.50, 2, 2),
     ('2023-11-05', 3200.00, 3, 3),
     ('2023-11-20', 10500.00, 4, 4),
     ('2023-12-10', 4800.00, 5, 5);
-
 -- Poblando tabla detalle_compra
 INSERT INTO detalle_compra (cantidad, precio_unitario, id_compra, id_smart)
-VALUES 
-    (25, 200.00, 1, 1), 
-    (50, 150.01, 2, 2), 
-    (32, 100.00, 3, 3), 
-    (30, 350.00, 4, 4), 
+VALUES
+    (25, 200.00, 1, 1),
+    (50, 150.01, 2, 2),
+    (32, 100.00, 3, 3),
+    (30, 350.00, 4, 4),
     (40, 120.00, 5, 5);
+-- -------------
+-- Transacciones
+-- -------------
+BEGIN;
+UPDATE smartphone
+SET stock = stock - 1
+WHERE id_smart = 1;
+UPDATE cabecera_venta
+SET total = 3499.99
+WHERE id_venta = 1;
+COMMIT;
+-- --------
+-- Rollback
+-- --------
+BEGIN;
+UPDATE smartphone
+SET stock = 999
+WHERE id_smart = 1;
+ROLLBACK;
