@@ -41,7 +41,7 @@ CREATE TABLE smartphone(
     especificaciones TEXT,
     -- llaves foráneas
     id_marca INT,
-    id_cat INT,
+    id_cat INT
 );
 -- 7ma entidad: Sucursal
 CREATE TABLE Sucursal(
