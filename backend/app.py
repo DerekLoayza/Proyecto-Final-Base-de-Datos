@@ -1,8 +1,8 @@
 from flask import Flask, Response, jsonify
+from flask_cors import CORS
 import psycopg2
-
 app = Flask(__name__)
-
+CORS(app)
 # Datos
 #Para descargar Python en la pc usamos //python -m pip install flask psycopg2-binary
 mi_conexion = {
