@@ -18,18 +18,29 @@ def registrar_venta():
     conexion = psycopg2.connect(**mi_conexion)
     cursor = conexion.cursor()
     try: 
-        cursor.execute("BEGIN;")
+        # cursor.execute("BEGIN;")
+        # Es mejor no utilizar BEGIN, como en sql utilizamos las funciones de psycopg2
         # factura
         cursor.execute("INSERT INTO cabecera_venta (fecha, total, id_cli, id_emp, id_suc) VALUES ('2026-06-11', 3500, 1, 1, 1) RETURNING id_venta;")
-        id_venta = cursor.fetchone()[0]
+        fila = cursor.fetchone()
+        if fila is None:
+            raise Exception("No se pudo obtener id_venta")
+        id_venta = fila[0]
+        # id_venta = cursor.fetchone()[0] no utilizamos porque:
+        # El insert no retorna nada
+        # o falla el returning y fetchone() devuelve None
         # detalle
         cursor.execute(f"INSERT INTO detalle_venta (cantidad, precio_unitario, id_smart, id_venta) VALUES (1, 3500, 1, {id_venta});")
         # stock
         cursor.execute("UPDATE smartphone SET stock = stock - 1 WHERE id_smart = 1;")
-        cursor.execute("COMMIT;")
+        # cursor.execute("COMMIT;")
+        conexion.commit()
+        # No COMMIT como sql, sino commit por psycopg2 
         return jsonify({"mensaje": "Todo salio bien, se actualizaron las 3 tablas."})
     except Exception as e:
-        cursor.execute("ROLLBACK;")
+        # cursor.execute("ROLLBACK;")
+        conexion.rollback()
+        # No ROLLBACK como sql, sino commit por psycopg2 
         return jsonify({"error": str(e)})
     finally:
         cursor.close()
