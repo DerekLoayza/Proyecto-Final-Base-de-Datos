@@ -25,7 +25,7 @@ VALUES
     (3, 'Xiaomi'),
     (4, 'Motorola'),
     (5, 'Huawei');
--- poblando tabla smartphone
+-- Poblando tabla smartphone
 INSERT INTO smartphone(modelo, precio, stock, especificaciones, id_marca, id_cat)
 VALUES
     ('Galaxy S24 Ultra', 1399.99, 15, '12GB RAM, 512GB, Snapdragon 8 Gen 3', 1, 1),
@@ -33,7 +33,7 @@ VALUES
     ('Redmi Note 13 Pro', 449.99, 30, '8GB RAM, 256GB, Snapdragon 7s Gen 2', 3, 2),
     ('Moto G84', 329.99, 25, '12GB RAM, 256GB, Snapdragon 695', 4, 2),
     ('Huawei Nova 12', 599.99, 20, '8GB RAM, 256GB, Kirin', 5, 5);
--- POblando tabla sucursal
+-- Poblando tabla sucursal
 INSERT INTO sucursal (nombre, direccion, telefono)
 VALUES
     ('Sucursal Centro', 'Av. Principal 123', '987654321'),
@@ -90,15 +90,12 @@ UPDATE smartphone
 SET stock = 999
 WHERE id_smart = 1;
 ROLLBACK;
-
-
-
---  NoSQL, tipo de dato JSONB
-
+-- -------------------------
+-- NoSQL, tipo de dato JSONB
+-- -------------------------
 -- Creamos tabla "DETALLES" de tipo jsonb 
 ALTER TABLE smartphone ADD COLUMN detalles JSONB;
-
--- llenamos datos para 3 celulares distintos
+-- LLenamos datos para 3 celulares distintos
 UPDATE smartphone 
 SET detalles = '{"ram": "12GB", "stylus": true, "procesador": "Snapdragon"}' 
 WHERE id_smart = 1;
@@ -110,8 +107,7 @@ WHERE id_smart = 2;
 UPDATE smartphone 
 SET detalles = '{"ram": "8GB", "carga_rapida": "67W", "infrarrojo": true}' 
 WHERE id_smart = 3;
-
--- consulta, ignora todo lo demas excepto ram 
+-- Consulta, ignora todo lo demás excepto ram 
 SELECT modelo, detalles->>'ram' AS memoria_ram 
 FROM smartphone 
 WHERE detalles IS NOT NULL;
