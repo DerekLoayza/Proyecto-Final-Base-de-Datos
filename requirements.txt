@@ -1,9 +1,22 @@
+LINUX:
 Creación del Entorno Virtual:
 - python3 -m venv venv
 Activar el Entorno
 - source venv/bin/activate
 Actualizar pip
-- install --upgrade pip
+- pip install --upgrade pip
 Instalación de dependencias
 - pip install flask psycopg2-binary
-- pip install flask-cors  
+- pip install flask-cors
+WINDOWS:
+Creación del Entorno Virtual
+- python -m venv venv
+Activar entorno (CMD)
+- venv\Scripts\activate
+o PowerShell:
+- venv\Scripts\Activate.ps1
+Actualizar pip
+- python -m pip install --upgrade pip
+Instalar dependencias
+- pip install flask psycopg2-binary
+- pip install flask-cors
