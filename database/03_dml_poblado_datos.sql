@@ -99,11 +99,9 @@ ALTER TABLE smartphone ADD COLUMN detalles JSONB;
 UPDATE smartphone 
 SET detalles = '{"ram": "12GB", "stylus": true, "procesador": "Snapdragon"}' 
 WHERE id_smart = 1;
-
 UPDATE smartphone 
 SET detalles = '{"ram": "8GB", "ecosistema": "iOS", "material": "Titanio"}' 
 WHERE id_smart = 2;
-
 UPDATE smartphone 
 SET detalles = '{"ram": "8GB", "carga_rapida": "67W", "infrarrojo": true}' 
 WHERE id_smart = 3;
