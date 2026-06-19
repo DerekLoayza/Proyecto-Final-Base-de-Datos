@@ -90,3 +90,28 @@ UPDATE smartphone
 SET stock = 999
 WHERE id_smart = 1;
 ROLLBACK;
+
+
+
+--  NoSQL, tipo de dato JSONB
+
+-- Creamos tabla "DETALLES" de tipo jsonb 
+ALTER TABLE smartphone ADD COLUMN detalles JSONB;
+
+-- llenamos datos para 3 celulares distintos
+UPDATE smartphone 
+SET detalles = '{"ram": "12GB", "stylus": true, "procesador": "Snapdragon"}' 
+WHERE id_smart = 1;
+
+UPDATE smartphone 
+SET detalles = '{"ram": "8GB", "ecosistema": "iOS", "material": "Titanio"}' 
+WHERE id_smart = 2;
+
+UPDATE smartphone 
+SET detalles = '{"ram": "8GB", "carga_rapida": "67W", "infrarrojo": true}' 
+WHERE id_smart = 3;
+
+-- consulta, ignora todo lo demas excepto ram 
+SELECT modelo, detalles->>'ram' AS memoria_ram 
+FROM smartphone 
+WHERE detalles IS NOT NULL;
