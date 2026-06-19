@@ -52,7 +52,6 @@ def exportar_reporte():
     cursor = conexion.cursor()
     
     consulta = """
-        EXPLAIN ANALYZE
         SELECT m.nombre, s.modelo, s.especificaciones, SUM(d.cantidad), SUM(d.cantidad * d.precio_unitario)
         FROM marca m
         JOIN smartphone s ON m.id_marca = s.id_marca
@@ -75,6 +74,32 @@ def exportar_reporte():
         mimetype="text/csv",
         headers={"Content-disposition": "attachment; filename=reporte_basico.csv"}
     )
+
+#endpoint para el EXPLAIN
+@app.route('/api/explicar_rendimiento', methods=['GET'])
+def explicar_rendimiento():
+    conexion = psycopg2.connect(**mi_conexion)
+    cursor = conexion.cursor()
+    
+    consulta = """
+        EXPLAIN ANALYZE
+        SELECT m.nombre, s.modelo, s.especificaciones, SUM(d.cantidad), SUM(d.cantidad * d.precio_unitario)
+        FROM marca m
+        JOIN smartphone s ON m.id_marca = s.id_marca
+        JOIN detalle_venta d ON s.id_smart = d.id_smart
+        GROUP BY m.nombre, s.modelo, s.especificaciones
+        HAVING SUM(d.cantidad * d.precio_unitario) > 1000;
+    """
+    cursor.execute(consulta)
+    plan_ejecucion = cursor.fetchall()
+    conexion.close()
+
+    resultado_texto = "Plan de Ejecucion con Detalles:\n\n"
+    for fila in plan_ejecucion:
+        resultado_texto += fila[0] + "\n"
+
+    return Response(resultado_texto, mimetype="text/plain")
+
     #Link para descargar reporte 
     #http://127.0.0.1:5000/api/exportar_reporte
 
