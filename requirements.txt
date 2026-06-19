@@ -1,0 +1,9 @@
+Creación del Entorno Virtual:
+- python3 -m venv venv
+Activar el Entorno
+- source venv/bin/activate
+Actualizar pip
+- install --upgrade pip
+Instalación de dependencias
+- pip install flask psycopg2-binary
+- pip install flask-cors  
