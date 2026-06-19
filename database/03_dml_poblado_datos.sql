@@ -48,7 +48,7 @@ VALUES ('Juan', 'Perez', '12345678', 1, 1);
 INSERT INTO cabecera_venta (fecha, total, id_cli, id_emp, id_suc)
 VALUES ('2026-06-07 10:00:00', 3500.00, 1, 1, 1);
 INSERT INTO detalle_venta (id_venta, id_smart, cantidad, precio_unitario)
-VALUES (1, 1, 1, 3500.00);
+VALUES (2400, 1900, 300, 3500.00);
 -- Poblando tabla pago_venta
 INSERT INTO pago_venta (monto, id_venta, id_mpago)
 VALUES (3500.00, 1, 1);

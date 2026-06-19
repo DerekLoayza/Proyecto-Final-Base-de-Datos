@@ -15,7 +15,7 @@ mi_conexion = {
 }
 
 
-# 1 endpoint CRUD 
+# 1 endpoint CRUD
 @app.route('/api/registrar_venta', methods=['POST'])
 def registrar_venta():
     conexion = psycopg2.connect(**mi_conexion)
@@ -26,7 +26,7 @@ def registrar_venta():
 
         # factura
         cursor.execute("INSERT INTO cabecera_venta (fecha, total, id_cli, id_emp, id_suc) VALUES ('2026-06-11', 3500, 1, 1, 1) RETURNING id_venta;")
-        id_venta = cursor.fetchone()[0]
+        id_venta    = cursor.fetchone()[0]
 
         # detalle
         cursor.execute(f"INSERT INTO detalle_venta (cantidad, precio_unitario, id_smart, id_venta) VALUES (1, 3500, 1, {id_venta});")
@@ -52,12 +52,11 @@ def exportar_reporte():
     cursor = conexion.cursor()
     
     consulta = """
-        EXPLAIN ANALYZE
-        SELECT m.nombre, s.modelo, s.especificaciones, SUM(d.cantidad), SUM(d.cantidad * d.precio_unitario)
+        SELECT m.nombre, SUM(d.cantidad), SUM(d.cantidad * d.precio_unitario)
         FROM marca m
         JOIN smartphone s ON m.id_marca = s.id_marca
         JOIN detalle_venta d ON s.id_smart = d.id_smart
-        GROUP BY m.nombre, s.modelo, s.especificaciones
+        GROUP BY m.nombre
         HAVING SUM(d.cantidad * d.precio_unitario) > 1000;
     """
     cursor.execute(consulta)
@@ -65,18 +64,19 @@ def exportar_reporte():
     conexion.close()
 
     # imprimimos el texto
-    texto_csv = "Marca,Modelo,Especificaciones,Total_Equipos_Vendidos,Ingresos_Totales\n"
+    texto_csv = "Marca,Total_Equipos_Vendidos,Ingresos_Totales\n"
     for fila in filas:
-        texto_csv += f"{fila[0]},{fila[1]},{fila[2]},{fila[3]},{fila[4]}\n"
+        texto_csv += f"{fila[0]},{fila[1]},{fila[2]}\n"
 
      # descarga
-        return Response(
+       return Response(
         texto_csv,
         mimetype="text/csv",
         headers={"Content-disposition": "attachment; filename=reporte_basico.csv"}
     )
     #Link para descargar reporte 
     #http://127.0.0.1:5000/api/exportar_reporte
+
 
 if __name__ == '__main__':
     app.run(port=5000)
