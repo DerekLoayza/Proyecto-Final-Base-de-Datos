@@ -4,36 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TuntungTech</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">
-            TuntungTech
-        </h1>
-        <div class="card p-4">
-            <h3>Registrar venta</h3>
-            <!-- Aquí luego irán los inputs -->
-            <button
-                id="btnVenta"
-                class="btn btn-primary mt-3">
-                Registrar venta
+    <header>
+        <h1>TuntungTech</h1>
+        <p>Sistema de Registro de Ventas</p>
+    </header>
+    <main class="container">
+    <!-- INVENTARIO -->
+    <section id="inventario">
+        <h2>Smartphones Disponibles</h2>
+        <table id="tablaSmartphones">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Modelo</th>
+                    <th>Marca</th>
+                    <th>Stock</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- JS -->
+            </tbody>
+        </table>
+    </section>
+    <!-- FORMULARIO VENTA -->
+    <section id="venta">
+        <h2>Registrar Venta</h2>
+        <form id="formVenta">
+            <label for="cliente">Cliente</label>
+            <select id="cliente"></select>
+            <label for="empleado">Empleado</label>
+            <select id="empleado"></select>
+            <label for="sucursal">Sucursal</label>
+            <select id="sucursal"></select>
+            <label for="smartphone">Smartphone</label>
+            <select id="smartphone"></select>
+            <label for="cantidad">Cantidad</label>
+            <input type="number" id="cantidad" min="1" value="1">
+            <button type="submit" id="btnVenta">
+                Registrar Venta
             </button>
-        </div>
-        <div class="card p-4 mt-4">
-            <h3>Reporte</h3>
-            <button
-                id="btnReporte"
-                class="btn btn-success">
-                Descargar reporte
-            </button>
-        </div>
-        <div
-            id="mensaje"
-            class="mt-4">
-        </div>
-    </div>
-    <script src="script.js"></script>
+        </form>
+    </section>
+    <!-- MENSAJE -->
+    <section id="estado">
+        <h2>Estado</h2>
+        <div id="mensaje"></div>
+    </section>
+    <!-- REPORTE -->
+    <section id="reporte">
+        <h2>Reporte</h2>
+        <button id="btnReporte">
+            Descargar Reporte CSV
+        </button>
+    </section>
+    </main>
 </body>
+<script src="script.js"></script>
 </html>
