@@ -57,3 +57,12 @@ JOIN marca m
 JOIN categoria c
     ON s.id_cat = c.id_cat
 ORDER BY m.nombre, s.modelo;
+-- Stock disponible
+SELECT
+    id_smart,
+    modelo,
+    precio,
+    stock
+FROM smartphone
+WHERE stock > 0
+ORDER BY modelo;
