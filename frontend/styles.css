@@ -1,15 +1,61 @@
-body{
-    background-color: #f8f9fa;
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 0;
 }
-.container{
-    max-width: 700px;
+header {
+    text-align: center;
+    padding: 20px;
 }
-.card{
-    border-radius: 12px;
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
 }
-h1{
-    font-weight: bold;
+section {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-button{
+table {
     width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+th {
+    background: #222;
+    color: white;
+}
+select, input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 10px;
+}
+button {
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    opacity: 0.8;
+}
+#btnVenta {
+    background: #007bff;
+    color: white;
+}
+#btnReporte {
+    background: green;
+    color: white;
+}
+#mensaje {
+    font-weight: bold;
+    text-align: center;
 }
