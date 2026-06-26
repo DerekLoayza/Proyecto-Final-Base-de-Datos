@@ -99,3 +99,17 @@ SELECT
     descripcion
 FROM metodo_pago
 ORDER BY descripcion;
+-- Información del smartphone
+SELECT
+    modelo,
+    precio,
+    stock
+FROM smartphone
+WHERE id_smart = %s;
+-- Existencia de un cliente
+SELECT
+    id_cli,
+    nombre,
+    apellido
+FROM cliente
+WHERE dni = %s;
