@@ -87,3 +87,15 @@ JOIN cargo c
 JOIN sucursal s
     ON e.id_suc = s.id_suc
 ORDER BY e.apellido;
+-- Sucursales
+SELECT
+    id_suc,
+    nombre
+FROM sucursal
+ORDER BY nombre;
+-- Métodos de pago
+SELECT
+    id_mpago,
+    descripcion
+FROM metodo_pago
+ORDER BY descripcion;
