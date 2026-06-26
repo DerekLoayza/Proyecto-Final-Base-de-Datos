@@ -113,3 +113,30 @@ SELECT
     apellido
 FROM cliente
 WHERE dni = %s;
+-- Detalle de una venta
+SELECT
+    dv.id_detalle,
+    s.modelo,
+    dv.cantidad,
+    dv.precio_unitario,
+    dv.cantidad * dv.precio_unitario AS subtotal
+FROM detalle_venta dv
+JOIN smartphone s
+    ON dv.id_smart = s.id_smart
+WHERE dv.id_venta = %s;
+-- Historial de ventas
+SELECT
+    cv.id_venta,
+    cv.fecha,
+    cli.nombre || ' ' || cli.apellido AS cliente,
+    emp.nombre || ' ' || emp.apellido AS empleado,
+    suc.nombre AS sucursal,
+    cv.total
+FROM cabecera_venta cv
+JOIN cliente cli
+    ON cv.id_cli = cli.id_cli
+JOIN empleado emp
+    ON cv.id_emp = emp.id_emp
+JOIN sucursal suc
+    ON cv.id_suc = suc.id_suc
+ORDER BY cv.fecha DESC;
