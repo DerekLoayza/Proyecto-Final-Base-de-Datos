@@ -66,3 +66,24 @@ SELECT
 FROM smartphone
 WHERE stock > 0
 ORDER BY modelo;
+-- Clientes
+SELECT
+    id_cli,
+    nombre,
+    apellido,
+    dni
+FROM cliente
+ORDER BY apellido, nombre;
+-- Empleados
+SELECT
+    e.id_emp,
+    e.nombre,
+    e.apellido,
+    c.nombre AS cargo,
+    s.nombre AS sucursal
+FROM empleado e
+JOIN cargo c
+    ON e.id_cargo = c.id_cargo
+JOIN sucursal s
+    ON e.id_suc = s.id_suc
+ORDER BY e.apellido;
