@@ -4,7 +4,12 @@
 INSERT INTO cargo (nombre)
 VALUES ('Vendedor'), ('Administrador');
 INSERT INTO cliente (nombre, apellido, dni)
-VALUES ('Juan', 'Perez', '12345678');
+VALUES
+    ('Juan', 'Perez', '12345678'),
+    ('Aldo', 'Paredes', '78162131'),
+    ('Jose', 'Velarde', '48912372'),
+    ('Julian', 'Quispe', '08781335'),
+    ('Mario', 'Zavala', '18794613');
 INSERT INTO proveedor (nombre, ruc)
 VALUES ('Dist A', '10000000001'), ('Dist B', '10000000002'), ('Dist C', '10000000003'), ('Dist D', '10000000004'), ('Dist E', '10000000005');
 INSERT INTO metodo_pago (descripcion)
