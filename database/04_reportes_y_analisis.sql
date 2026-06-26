@@ -43,3 +43,17 @@ JOIN SMARTPHONE s ON m.id_marca = s.id_marca
 JOIN DETALLE_VENTA d ON s.id_smart = d.id_smart
 GROUP BY m.nombre
 HAVING SUM(d.cantidad * d.precio_unitario) > 1000;
+-- Smartphone disponibles
+SELECT
+    s.id_smart,
+    m.nombre AS marca,
+    s.modelo,
+    c.nombre AS categoria,
+    s.precio,
+    s.stock
+FROM smartphone s
+JOIN marca m
+    ON s.id_marca = m.id_marca
+JOIN categoria c
+    ON s.id_cat = c.id_cat
+ORDER BY m.nombre, s.modelo;
