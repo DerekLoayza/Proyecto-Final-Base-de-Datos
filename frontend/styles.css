@@ -1,8 +1,11 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
     margin: 0;
     padding: 0;
+    background-image: url("img/1396618.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 header {
     text-align: center;
