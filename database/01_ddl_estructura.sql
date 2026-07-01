@@ -44,8 +44,8 @@ CREATE TABLE smartphone(
     id_cat INT
 );
 -- 7ma entidad: Sucursal
-CREATE TABLE Sucursal(
-    id_suc SERIAL PRIMARY KEY,
+CREATE TABLE sucursal(
+    id_suc SERIAL PRIMARY KEY,  
     nombre VARCHAR(50) NOT NULL UNIQUE,
     direccion VARCHAR(100) NOT NULL UNIQUE,
     telefono VARCHAR(20) NOT NULL UNIQUE

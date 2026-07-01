@@ -49,11 +49,11 @@ VALUES
 -- Inserts básicos de prueba 
 INSERT INTO empleado (nombre, apellido, dni, id_suc, id_cargo)
 VALUES
-    ('Juan', 'Perez', '12345678', 1, 1),
+    ('Margarita', 'Perez', '79454612', 1, 1),
     ('Maria', 'Gomez', '23456789', 2, 2),
-    ('Carlos', 'Ramirez', '34567890', 3, 3),
-    ('Ana', 'Torres', '45678901', 4, 4),
-    ('Juan', 'Perez', '12345678', 5, 5);
+    ('Carlos', 'Ramirez', '34567890', 3, 1),
+    ('Ana', 'Torres', '45678901', 4, 2),
+    ('Juan', 'Paredes', '12345678', 5, 1);
 -- Datos de prueba para simular una venta y probar el reporte
 INSERT INTO cabecera_venta (fecha, total, id_cli, id_emp, id_suc)
 VALUES ('2026-06-07 10:00:00', 3500.00, 1, 1, 1);
