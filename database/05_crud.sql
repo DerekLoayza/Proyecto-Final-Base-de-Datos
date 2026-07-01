@@ -1,7 +1,5 @@
 
--- =========================================================
--- 🔥 CREATE: VENTA COMPLETA
--- =========================================================
+-- CREATE
 BEGIN;
 
 INSERT INTO cabecera_venta (fecha, total, id_cli, id_emp, id_suc)
@@ -30,9 +28,8 @@ WHERE id_venta = (SELECT MAX(id_venta) FROM cabecera_venta);
 COMMIT;
 
 
--- =========================================================
--- 🔥 READ: CONSULTAS (SELECTS)
--- =========================================================
+
+-- READ
 
 -- Ver smartphones disponibles
 SELECT * FROM smartphone;
@@ -49,9 +46,7 @@ JOIN sucursal s ON e.id_suc = s.id_suc;
 SELECT * FROM cabecera_venta;
 
 
--- =========================================================
--- 🔥 UPDATE: ACTUALIZAR VENTA (ejemplo stock + precio)
--- =========================================================
+-- UPDATE
 
 -- cambiar stock de un celular
 UPDATE smartphone
@@ -69,9 +64,7 @@ SET total = 5000
 WHERE id_venta = 1;
 
 
--- =========================================================
--- 🔥 DELETE: ELIMINAR VENTA COMPLETA
--- =========================================================
+--  DELETE
 
 BEGIN;
 
@@ -95,9 +88,7 @@ WHERE id_venta = 1;
 COMMIT;
 
 
--- =========================================================
--- 🔥 DELETE: ELIMINAR COMPRA COMPLETA
--- =========================================================
+-- DELETE:
 
 BEGIN;
 
