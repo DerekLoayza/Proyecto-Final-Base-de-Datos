@@ -30,9 +30,25 @@ def registrar_venta():
         # El insert no retorna nada
         # o falla el returning y fetchone() devuelve None
         # detalle
-        cursor.execute(f"INSERT INTO detalle_venta (cantidad, precio_unitario, id_smart, id_venta) VALUES (1, 3500, 1, {id_venta});")
+        # cursor.execute(f"INSERT INTO detalle_venta (cantidad, precio_unitario, id_smart, id_venta) VALUES (1, 3500, 1, {id_venta});")
+        cursor.execute(
+            """
+            INSERT INTO detalle_venta
+            (cantidad, precio_unitario, id_smart, id_venta)
+            VALUES (%s,%s,%s,%s)
+            """,
+            (1,3500,1,id_venta)
+        )
         # stock
-        cursor.execute("UPDATE smartphone SET stock = stock - 1 WHERE id_smart = 1;")
+        # cursor.execute("UPDATE smartphone SET stock = stock - %s WHERE id_smart = %s;")
+        cursor.execute(
+            """
+            UPDATE smartphone
+            SET stock = stock - %s
+            WHERE id_smart = %s
+            """,
+            (1, 1)
+        )
         # cursor.execute("COMMIT;")
         conexion.commit()
         # No COMMIT como sql, sino commit por psycopg2 
@@ -61,13 +77,14 @@ def exportar_reporte():
     """
     cursor.execute(consulta)
     filas = cursor.fetchall()
+    cursor.close()
     conexion.close()
     # imprimimos el texto
     texto_csv = "Marca,Modelo,Especificaciones,Total_Equipos_Vendidos,Ingresos_Totales\n"
     for fila in filas:
         texto_csv += f"{fila[0]},{fila[1]},{fila[2]},{fila[3]},{fila[4]}\n"
-    # descarga
-        return Response(
+    return Response(
+        # descarga
         texto_csv,
         mimetype="text/csv",
         headers={"Content-disposition": "attachment; filename=reporte_basico.csv"}
@@ -96,7 +113,7 @@ def get_smartphones():
         resultado = []
         for f in filas:
             resultado.append({
-                "id": f[0],
+                "id_smart": f[0],
                 "marca": f[1],
                 "modelo": f[2],
                 "categoria": f[3],
@@ -120,7 +137,7 @@ def get_clientes():
         filas = cursor.fetchall()
         return jsonify([
             {
-                "id": f[0],
+                "id_cli": f[0],
                 "nombre": f[1],
                 "apellido": f[2],
                 "telefono": f[3]
@@ -137,24 +154,15 @@ def get_empleados():
     cursor = conexion.cursor()
     try:
         cursor.execute("""
-            SELECT 
-                e.id_emp,
-                e.nombre,
-                e.apellido,
-                c.nombre AS cargo,
-                s.nombre AS sucursal
-            FROM empleado e
-            JOIN cargo c ON e.id_cargo = c.id_cargo
-            JOIN sucursal s ON e.id_suc = s.id_suc;
+            SELECT id_cli, nombre, apellido, telefono
+            FROM cliente;
         """)
         filas = cursor.fetchall()
         return jsonify([
             {
-                "id": f[0],
+                "id_emp": f[0],
                 "nombre": f[1],
-                "apellido": f[2],
-                "cargo": f[3],
-                "sucursal": f[4]
+                "apellido": f[2]
             }
             for f in filas
         ])
@@ -174,7 +182,7 @@ def get_sucursales():
         filas = cursor.fetchall()
         return jsonify([
             {
-                "id": f[0],
+                "id_suc": f[0],
                 "nombre": f[1],
                 "direccion": f[2]
             }
@@ -194,9 +202,37 @@ def get_stock():
             FROM smartphone;
         """)
         return jsonify([
-            {"id": f[0], "stock": f[1]}
+            {"id_smart": f[0], "stock": f[1]}
             for f in cursor.fetchall()
         ])
+    finally:
+        cursor.close()
+        conexion.close()
+
+# 8 endpoint NoSQL - Filtrar características JSONB
+@app.route('/api/smartphones_ram', methods=['GET'])
+def obtener_celulares_por_ram():
+    conexion = psycopg2.connect(**mi_conexion)
+    cursor = conexion.cursor()
+    try:
+        # Aquí insertamos tu consulta SQL pura con el operador de JSONB
+        cursor.execute("""
+            SELECT modelo, detalles->>'ram' AS memoria_ram
+            FROM smartphone
+            WHERE detalles IS NOT NULL;
+        """)
+        filas = cursor.fetchall()
+        
+        # Formateamos la respuesta para que la web la entienda
+        resultado = []
+        for f in filas:
+            resultado.append({
+                "modelo": f[0],
+                "memoria_ram": f[1]
+            })
+        return jsonify(resultado)
+    except Exception as e:
+        return jsonify({"error": str(e)})
     finally:
         cursor.close()
         conexion.close()
